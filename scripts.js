@@ -1,7 +1,23 @@
+import { authors } from "./data.js";
+import { genres } from "./data.js";
+import { books } from "./data.js";
 
-import { BOOKS_PER_PAGE, authors, genres, books } from '/data.js';
 document.addEventListener('DOMContentLoaded', function() {
+    const BOOKS_PER_PAGE = 36;
+    let page = 1;
 
+    if (!books && !Array.isArray(books)) {
+        throw new Error('Source required');
+    }
+
+    let startIndex = (page - 1) * BOOKS_PER_PAGE;
+    let endIndex = BOOKS_PER_PAGE;
+    let range = [startIndex, endIndex]
+
+
+    if (!range && range.length < 2) {
+        throw new Error('Range must be an array with two numbers');
+    }
 
 
     //Function to search for books
