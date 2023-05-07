@@ -275,7 +275,7 @@ headerSettings.addEventListener('click', () => {
     settingsOverlay.showModal()
 })
 
-dataSettingsCancel.addEventListener('click', () => {
+searchCancel.addEventListener('click', () => {
     settingsOverlay.close()
 })
 
@@ -299,7 +299,6 @@ settingsTheme.value = window.matchMedia && window.matchMedia('(prefers-color-sch
  *  The code then checks if the theme property of the object is set to night.
  *  If so, the code sets the CSS variables to the night theme. Otherwise, the code sets the CSS variables to the day theme.
  */
- 
 dataSettingsForm.addEventListener('submit', (event) => {
     event.preventDefault()
     const formSubmit = new FormData(event.target)
