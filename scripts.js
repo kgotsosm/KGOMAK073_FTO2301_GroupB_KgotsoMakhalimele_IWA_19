@@ -1,3 +1,4 @@
+
 import { BOOKS_PER_PAGE,
         authors,
         genres,
@@ -5,8 +6,8 @@ import { BOOKS_PER_PAGE,
     from "./data.js";
 
 /**
- * Declare all the constants with querySelector() method to select elements from
- * the Document Object Model (DOM) using data attributes
+ * Declare all the constants with querySelector() method to select elements from the html file.
+ * The querySelector() method returns the first element that matches a specified CSS selector(s) in the document.
  */
 
 const headerSearch = document.querySelector('[data-header-search]')
@@ -96,21 +97,22 @@ listItems.appendChild(bookFragment)
  *  If there are no more books to display, it disables the button and updates the text to show 0 remaining books.
  */
 listButton.addEventListener('click', () => {
+
     page++;
 
-    const newStartIndex = (page - 1) * BOOKS_PER_PAGE
-    const newEndIndex = newStartIndex + BOOKS_PER_PAGE
+    const start = (page - 1) * BOOKS_PER_PAGE
+    const end = start + BOOKS_PER_PAGE
 
-    const newBookExtracted = books.slice(newStartIndex, newEndIndex)
+    const bookSelected= books.slice(start, end)
 
-    const newBookFragment = document.createDocumentFragment()
+    const bookFragment = document.createDocumentFragment()
 
-    for (const preview of newBookExtracted) {
+    for (const preview of bookSelected) {
         const showPreview = createPreview(preview)
-        newBookFragment.appendChild(showPreview)
+        bookFragment.appendChild(showPreview)
     }
 
-    listItems.appendChild(newBookFragment);
+    listItems.appendChild(bookFragment);
 
     const remaining = matches.length - page * BOOKS_PER_PAGE;
     listButton.innerHTML = /* HTML */ `
@@ -132,7 +134,7 @@ listButton.innerHTML = /* HTML */
  * BOOK SUMMARY
  */
 
-// When dataListItems is clicked, it shows the modal by invoking showModal() on dataListActive.
+// When dataListItems is clicked, it shows the modal by invoking showModal() on to give a brief summary of the book clicked.
 listItems.addEventListener('click', (event) => {
     listActive.showModal()
     let pathArray = Array.from(event.path || event.composedPath())
@@ -159,7 +161,7 @@ listItems.addEventListener('click', (event) => {
 })
 
 
-//When dataListClose is clicked, it closes the modal by invoking close() on dataListActive.
+//When dataListClose is clicked, it closes the summary by invoking close() on dataListActive.
 listClose.addEventListener('click', () => {
     listActive.close()
 })
@@ -257,7 +259,6 @@ searchForm.addEventListener('submit', (event) => {
       `;
         listButton.disabled = true;
     }
-
     // If there are results, the code displays the results to the user.
     searchOverlay.close();
     searchForm.reset();
